@@ -6,8 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public class UsuarioRepository extends JpaRepository<Usuario, Integer> {
-
+public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
     Optional<Usuario> findByEmail(String email);
 
     @Transactional
