@@ -39,4 +39,6 @@ public class UsuarioService {
                 .id(usuarioEntity.getId())
                 .build();
 
+        repository.saveAndFlush(usuarioAtualizado);
+    }
 }
