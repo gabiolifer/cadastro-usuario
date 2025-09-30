@@ -1,40 +1,143 @@
+/* Fonte e base */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f6f8;
-    color: #333;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #ff6ec7, #8e2de2, #4a00e0);
+  background-size: 300% 300%;
+  animation: gradientBG 12s ease infinite;
+  color: #fff;
 }
 
-h1 {
-    color: #2c3e50;
-    text-align: center;
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-h2 {
-    margin-top: 20px;
-    color: #34495e;
+/* Cabeçalho */
+header {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 3px solid #ffdd59;
 }
 
+header h1 {
+  margin: 0;
+  font-size: 2.8em;
+  color: #ffdd59;
+  text-shadow: 2px 2px #000;
+}
+
+header p {
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #ffeaa7;
+}
+
+/* Container principal */
+main {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: 20px;
+}
+
+/* Cards */
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 18px rgba(0,0,0,0.5);
+}
+
+.card h2 {
+  margin-bottom: 15px;
+  font-size: 1.4em;
+  color: #fff;
+  text-shadow: 1px 1px #000;
+}
+
+/* Cores diferentes por ação */
+.card.add { border-left: 6px solid #00cec9; }
+.card.search { border-left: 6px solid #74b9ff; }
+.card.update { border-left: 6px solid #fdcb6e; }
+.card.delete { border-left: 6px solid #ff7675; }
+
+/* Inputs e botões */
 input, button {
-    margin: 5px 0;
-    padding: 8px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;  /* <<< CORRIGE inputs saindo do card */
 }
 
+input {
+  background: rgba(255, 255, 255, 0.9);
+  color: #2d3436;
+}
+
+input:focus {
+  border: 2px solid #6c5ce7;
+  box-shadow: 0 0 6px rgba(108,92,231,0.8);
+}
+
+/* Botões vibrantes com gradiente */
 button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s;
+  font-weight: bold;
+  cursor: pointer;
+  color: #9370DB;
+  transition: transform 0.2s, box-shadow 0.3s;
+  background-size: 200% auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  background-color: #4B0082;
 }
 
 button:hover {
-    background-color: #2980b9;
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.4);
 }
 
-hr {
-    margin: 20px 0;
+/* Botão específico por card */
+.card.add button { background: linear-gradient(45deg, #00cec9, #0984e3); }
+.card.search button { background: linear-gradient(45deg, #74b9ff, #6c5ce7); }
+.card.update button { background: linear-gradient(45deg, #fdcb6e, #e17055); }
+.card.delete button { background: linear-gradient(45deg, #ff7675, #d63031); }
+
+/* Resultado */
+pre {
+  background: rgba(0,0,0,0.7);
+  color: #dfe6e9;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 10px;
+  max-height: 200px;
+  overflow: auto;
+  text-align: left;
+}
+
+/* Rodapé */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  border-top: 3px solid #ffdd59;
+  color: #ffeaa7;
+  margin-top: 20px;
 }

@@ -2,44 +2,56 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro de Usuário</title>
+    <title>🎬 Locadora</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Cadastro de Usuário</h1>
+<header>
+    <h1>🎬 Locadora!</h1>
+</header>
 
-<!-- Criar usuário -->
-<h2>Criar</h2>
-<input type="text" id="nome" placeholder="Nome">
-<input type="email" id="email" placeholder="Email">
-<button onclick="criar()">Salvar</button>
+<main>
+    <!-- Criar filme -->
+    <section class="card">
+        <h2>➕ Adicionar Filme</h2>
+        <input type="text" id="nome" placeholder="Nome do Filme">
+        <input type="text" id="ano" placeholder="Ano de Lançamento">
+        <input type="text" id="diretor" placeholder="Diretor">
+        <button onclick="criar()">Salvar 🎥</button>
+    </section>
 
-<hr>
+    <!-- Buscar filme -->
+    <section class="card">
+        <h2>🔎 Buscar Filme</h2>
+        <input type="text" id="buscarNome" placeholder="Nome do Filme">
+        <button onclick="buscar()">Buscar 🔍</button>
+        <pre id="resultadoBuscar"></pre>
+    </section>
 
-<!-- Buscar usuário -->
-<h2>Buscar</h2>
-<input type="email" id="buscarEmail" placeholder="Email">
-<button onclick="buscar()">Buscar</button>
-<pre id="resultadoBuscar"></pre>
+    <!-- Deletar filme -->
+    <section class="card danger">
+        <h2>🗑️ Deletar Filme</h2>
+        <input type="text" id="deletarNome" placeholder="Nome do Filme">
+        <button onclick="deletar()">Deletar ❌</button>
+    </section>
 
-<hr>
+    <!-- Atualizar filme -->
+    <section class="card">
+        <h2>✏️ Atualizar Filme</h2>
+        <input type="number" id="id" placeholder="ID">
+        <input type="text" id="novoNome" placeholder="Novo Nome">
+        <input type="text" id="novoAno" placeholder="Novo Ano">
+        <input type="text" id="novoDiretor" placeholder="Novo Diretor">
+        <button onclick="atualizar()">Atualizar 🔄</button>
+    </section>
+</main>
 
-<!-- Deletar usuário -->
-<h2>Deletar</h2>
-<input type="email" id="deletarEmail" placeholder="Email">
-<button onclick="deletar()">Deletar</button>
-
-<hr>
-
-<!-- Atualizar usuário -->
-<h2>Atualizar</h2>
-<input type="number" id="id" placeholder="ID">
-<input type="text" id="novoNome" placeholder="Novo Nome">
-<input type="email" id="novoEmail" placeholder="Novo Email">
-<button onclick="atualizar()">Atualizar</button>
+<footer>
+    <p>🍿 Locadora - Projeto Java - Gabriela Oliveira</p>
+</footer>
 
 <script>
-    const api = "/usuario";
+    const api = "/filme";
 
     async function criar() {
       const resp = await fetch(api, {
@@ -47,27 +59,28 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nome: document.getElementById("nome").value,
-          email: document.getElementById("email").value
+          ano: document.getElementById("ano").value,
+          diretor: document.getElementById("diretor").value
         })
       });
-      alert(resp.ok ? "Usuário criado!" : "Erro ao criar!");
+      alert(resp.ok ? "🎉 Filme adicionado!" : "❌ Erro ao salvar!");
     }
 
     async function buscar() {
-      const email = document.getElementById("buscarEmail").value;
-      const resp = await fetch(`${api}?email=${encodeURIComponent(email)}`);
+      const nome = document.getElementById("buscarNome").value;
+      const resp = await fetch(`${api}?nome=${encodeURIComponent(nome)}`);
       if (resp.ok) {
         const data = await resp.json();
         document.getElementById("resultadoBuscar").innerText = JSON.stringify(data, null, 2);
       } else {
-        document.getElementById("resultadoBuscar").innerText = "Usuário não encontrado!";
+        document.getElementById("resultadoBuscar").innerText = "❌ Filme não encontrado!";
       }
     }
 
     async function deletar() {
-      const email = document.getElementById("deletarEmail").value;
-      const resp = await fetch(`${api}?email=${encodeURIComponent(email)}`, { method: "DELETE" });
-      alert(resp.ok ? "Usuário deletado!" : "Erro ao deletar!");
+      const nome = document.getElementById("deletarNome").value;
+      const resp = await fetch(`${api}?nome=${encodeURIComponent(nome)}`, { method: "DELETE" });
+      alert(resp.ok ? "🗑️ Filme deletado!" : "❌ Erro ao deletar!");
     }
 
     async function atualizar() {
@@ -77,10 +90,11 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nome: document.getElementById("novoNome").value,
-          email: document.getElementById("novoEmail").value
+          ano: document.getElementById("novoAno").value,
+          diretor: document.getElementById("novoDiretor").value
         })
       });
-      alert(resp.ok ? "Usuário atualizado!" : "Erro ao atualizar!");
+      alert(resp.ok ? "✅ Filme atualizado!" : "❌ Erro ao atualizar!");
     }
 </script>
 </body>
